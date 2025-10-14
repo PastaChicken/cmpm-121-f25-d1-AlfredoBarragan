@@ -11,5 +11,5 @@ document.body.innerHTML = `
 `;
 
 const button = document.createElement("button");
-button.textContent = "Click me";
+button.textContent = "🍕";
 document.body.appendChild(button);
