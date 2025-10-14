@@ -1,11 +1,13 @@
 import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
+function startCounterInterval(callback: () => void, interval: number) {
+  return setInterval(callback, interval);
+}
+
 document.body.innerHTML = `
   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
 `;
-
-
 
 const counterDiv = document.createElement("div");
 let counter = 0;
@@ -23,3 +25,7 @@ button.addEventListener("click", () => {
   counterDiv.textContent = `${counter} Pizza's`;
 });
 
+startCounterInterval(() => {
+  counter++;
+  counterDiv.textContent = `${counter} Pizza's`;
+}, 1000);
