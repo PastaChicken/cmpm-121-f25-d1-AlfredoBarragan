@@ -10,7 +10,6 @@ document.body.innerHTML = `
 
 `;
 
-//make a button first
-//<button class="favorite styled" type="button">Add to favorites</button>
-
-console.log("something");
+const button = document.createElement('button');
+button.textContent = 'Click me';
+document.body.appendChild(button);
