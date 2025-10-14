@@ -5,11 +5,21 @@ document.body.innerHTML = `
   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
 `;
 
-document.body.innerHTML = ` 
-  <p> I make change </p>
 
-`;
+
+const counterDiv = document.createElement("div");
+let counter = 0;
+
+counterDiv.textContent = `${counter} Pizza's`;
+
+document.body.appendChild(counterDiv);
 
 const button = document.createElement("button");
 button.textContent = "🍕";
 document.body.appendChild(button);
+
+button.addEventListener("click", () => {
+  counter++;
+  counterDiv.textContent = `${counter} Pizza's`;
+});
+
