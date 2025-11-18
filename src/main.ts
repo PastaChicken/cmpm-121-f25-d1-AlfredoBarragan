@@ -1,4 +1,3 @@
-import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
 // Simple upgrades implementation with requestAnimationFrame-based auto-increment
@@ -42,9 +41,10 @@ const upgrades: Upgrade[] = [
   },
 ];
 
-document.body.innerHTML = `
-  <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-`;
+const title = document.createElement("h1");
+title.textContent = "Cool Pizza Clicker";
+title.style.marginBottom = "0.5rem";
+title.style.textAlign = "center";
 
 const counterDiv = document.createElement("div");
 const perSecondDiv = document.createElement("div");
@@ -60,11 +60,18 @@ perSecondDiv.textContent = `${perSecond.toFixed(2)} / s`;
 document.body.appendChild(counterDiv);
 document.body.appendChild(perSecondDiv);
 
-// Create click button
+// Create click button (emoji-only, larger, transparent background)
 const button = document.createElement("button");
 button.textContent = "🍕";
-button.style.fontSize = "2rem";
+button.style.fontSize = "5rem"; // bigger pizza
 button.style.margin = "0.5rem";
+button.style.background = "transparent";
+button.style.border = "none";
+button.style.padding = "0";
+button.style.cursor = "pointer";
+button.style.lineHeight = "1";
+button.setAttribute("aria-label", "Click pizza");
+document.body.appendChild(title);
 document.body.appendChild(button);
 
 // Upgrades section
