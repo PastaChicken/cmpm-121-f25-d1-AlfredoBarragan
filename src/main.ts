@@ -1,22 +1,22 @@
 import "./style.css";
 
 // === GAME DATA ===
-type Upgrade = {
+type Boost = {
   id: string;
   name: string;
   description?: string;
-  baseCost: number; // initial cost for level 0 -> 1
+  initialCost: number; // initial cost for level 0 -> 1
   costMultiplier?: number; // multiplier per level (default 1.15)
   level: number; // how many times purchased
   perLevel: number; // how much perSecond each level provides
 };
 
-const upgrades: Upgrade[] = [
+const upgrades: Boost[] = [
   {
     id: "oven",
     name: "Better Oven",
     description: "+0.5 / s",
-    baseCost: 10,
+    initialCost: 10,
     costMultiplier: 1.15,
     level: 0,
     perLevel: 0.5,
@@ -25,7 +25,7 @@ const upgrades: Upgrade[] = [
     id: "marketing",
     name: "Marketing Campaign",
     description: "+1 / s",
-    baseCost: 25,
+    initialCost: 25,
     costMultiplier: 1.12,
     level: 0,
     perLevel: 1,
@@ -34,7 +34,7 @@ const upgrades: Upgrade[] = [
     id: "delivery",
     name: "Delivery Route",
     description: "+2 / s",
-    baseCost: 50,
+    initialCost: 50,
     costMultiplier: 1.15,
     level: 0,
     perLevel: 2,
@@ -43,7 +43,7 @@ const upgrades: Upgrade[] = [
     id: "factory",
     name: "Pizza Factory",
     description: "+10 / s",
-    baseCost: 200,
+    initialCost: 200,
     costMultiplier: 1.15,
     level: 0,
     perLevel: 10,
@@ -52,7 +52,7 @@ const upgrades: Upgrade[] = [
     id: "robot",
     name: "Pizza Robot",
     description: "+50 / s",
-    baseCost: 2000,
+    initialCost: 2000,
     costMultiplier: 1.2,
     level: 0,
     perLevel: 50,
@@ -115,13 +115,13 @@ function commitState() {
 }
 
 // Cost scales exponentially: baseCost * multiplier^level
-function costForLevel(u: Upgrade) {
+function costForLevel(u: Boost) {
   const multiplier = u.costMultiplier ?? 1.15;
   // cost to buy the next level (level -> level + 1)
-  return Math.ceil(u.baseCost * Math.pow(multiplier, u.level));
+  return Math.ceil(u.initialCost * Math.pow(multiplier, u.level));
 }
 
-function createUpgradeElement(u: Upgrade) {
+function createUpgradeElement(u: Boost) {
   const wrap = document.createElement("div");
   wrap.style.marginBottom = "0.5rem";
 
