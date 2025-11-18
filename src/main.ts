@@ -22,6 +22,15 @@ const upgrades: Upgrade[] = [
     perLevel: 0.5,
   },
   {
+    id: "marketing",
+    name: "Marketing Campaign",
+    description: "+1 / s",
+    baseCost: 25,
+    costMultiplier: 1.12,
+    level: 0,
+    perLevel: 1,
+  },
+  {
     id: "delivery",
     name: "Delivery Route",
     description: "+2 / s",
@@ -38,6 +47,15 @@ const upgrades: Upgrade[] = [
     costMultiplier: 1.15,
     level: 0,
     perLevel: 10,
+  },
+  {
+    id: "robot",
+    name: "Pizza Robot",
+    description: "+50 / s",
+    baseCost: 2000,
+    costMultiplier: 1.2,
+    level: 0,
+    perLevel: 50,
   },
 ];
 
