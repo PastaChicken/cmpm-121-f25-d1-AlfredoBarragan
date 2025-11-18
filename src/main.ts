@@ -1,6 +1,6 @@
 import "./style.css";
 
-// Simple upgrades implementation with requestAnimationFrame-based auto-increment
+// === GAME DATA ===
 type Upgrade = {
   id: string;
   name: string;
@@ -58,7 +58,7 @@ const upgrades: Upgrade[] = [
     perLevel: 50,
   },
 ];
-
+// === UI CONSTRUCTION ===
 const title = document.createElement("h1");
 title.textContent = "Cool Pizza Clicker";
 title.style.marginBottom = "0.5rem";
@@ -92,15 +92,17 @@ button.setAttribute("aria-label", "Click pizza");
 document.body.appendChild(title);
 document.body.appendChild(button);
 
-// Upgrades section
 upgradesContainer.style.marginTop = "1rem";
 document.body.appendChild(upgradesContainer);
-
+// === EVENT HANDLERS ===
+// (your button.click listener and createUpgradeElement)
 button.addEventListener("click", () => {
   counter++;
   commitState();
 });
 
+// Upgrades section
+// === UPDATE LOGIC ===
 function updateDisplays() {
   counterDiv.textContent = `${counter} Pizza's`;
   perSecondDiv.textContent = `${perSecond.toFixed(2)} / s`;
@@ -112,6 +114,7 @@ function commitState() {
   refreshUpgradesUI();
 }
 
+// Cost scales exponentially: baseCost * multiplier^level
 function costForLevel(u: Upgrade) {
   const multiplier = u.costMultiplier ?? 1.15;
   // cost to buy the next level (level -> level + 1)
@@ -176,5 +179,5 @@ function animate(now: number) {
 
   requestAnimationFrame(animate);
 }
-
+// === GAME LOOP ===
 requestAnimationFrame(animate);
