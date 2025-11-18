@@ -6,9 +6,10 @@ type Upgrade = {
   id: string;
   name: string;
   description?: string;
-  cost: number; // integer cost in pizzas
-  perSecond: number; // how many pizzas per second this provides
-  purchased: boolean;
+  baseCost: number; // initial cost for level 0 -> 1
+  costMultiplier?: number; // multiplier per level (default 1.15)
+  level: number; // how many times purchased
+  perLevel: number; // how much perSecond each level provides
 };
 
 const upgrades: Upgrade[] = [
@@ -16,25 +17,28 @@ const upgrades: Upgrade[] = [
     id: "oven",
     name: "Better Oven",
     description: "+0.5 / s",
-    cost: 10,
-    perSecond: 0.5,
-    purchased: false,
+    baseCost: 10,
+    costMultiplier: 1.15,
+    level: 0,
+    perLevel: 0.5,
   },
   {
     id: "delivery",
     name: "Delivery Route",
     description: "+2 / s",
-    cost: 50,
-    perSecond: 2,
-    purchased: false,
+    baseCost: 50,
+    costMultiplier: 1.15,
+    level: 0,
+    perLevel: 2,
   },
   {
     id: "factory",
     name: "Pizza Factory",
     description: "+10 / s",
-    cost: 200,
-    perSecond: 10,
-    purchased: false,
+    baseCost: 200,
+    costMultiplier: 1.15,
+    level: 0,
+    perLevel: 10,
   },
 ];
 
@@ -47,7 +51,7 @@ const perSecondDiv = document.createElement("div");
 const upgradesContainer = document.createElement("div");
 
 let counter = 0; // integer pizzas
-let perSecond = 0; // total pizzas per second from upgrades
+let perSecond = upgrades.reduce((s, u) => s + u.level * u.perLevel, 0); // total pizzas per second from upgrades
 let accumulator = 0; // fractional accumulator for perSecond over frames
 
 counterDiv.textContent = `${counter} Pizza's`;
@@ -78,23 +82,32 @@ function updateDisplays() {
   perSecondDiv.textContent = `${perSecond.toFixed(2)} / s`;
 }
 
+function costForLevel(u: Upgrade) {
+  const multiplier = u.costMultiplier ?? 1.15;
+  // cost to buy the next level (level -> level + 1)
+  return Math.ceil(u.baseCost * Math.pow(multiplier, u.level));
+}
+
 function createUpgradeElement(u: Upgrade) {
   const wrap = document.createElement("div");
   wrap.style.marginBottom = "0.5rem";
 
   const label = document.createElement("span");
-  label.textContent = `${u.name} (${u.description ?? ""}) - Cost: ${u.cost}`;
+  const currentCost = costForLevel(u);
+  label.textContent = `${u.name} (${
+    u.description ?? ""
+  }) — Level: ${u.level} — Next: ${currentCost}`;
   label.style.marginRight = "1rem";
 
   const buyBtn = document.createElement("button");
-  buyBtn.textContent = u.purchased ? "Purchased" : "Buy";
-  buyBtn.disabled = u.purchased || counter < u.cost;
+  buyBtn.textContent = `Buy (${currentCost})`;
+  buyBtn.disabled = counter < currentCost;
 
   buyBtn.addEventListener("click", () => {
-    if (!u.purchased && counter >= u.cost) {
-      counter -= u.cost;
-      u.purchased = true;
-      perSecond += u.perSecond;
+    if (counter >= currentCost) {
+      counter -= currentCost;
+      u.level += 1;
+      perSecond += u.perLevel;
       updateDisplays();
       refreshUpgradesUI();
     }
