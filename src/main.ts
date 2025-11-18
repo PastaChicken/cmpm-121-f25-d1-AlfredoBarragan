@@ -80,13 +80,18 @@ document.body.appendChild(upgradesContainer);
 
 button.addEventListener("click", () => {
   counter++;
-  updateDisplays();
-  refreshUpgradesUI();
+  commitState();
 });
 
 function updateDisplays() {
   counterDiv.textContent = `${counter} Pizza's`;
   perSecondDiv.textContent = `${perSecond.toFixed(2)} / s`;
+}
+
+// Helper to apply UI updates in one place (reduces duplicate calls)
+function commitState() {
+  updateDisplays();
+  refreshUpgradesUI();
 }
 
 function costForLevel(u: Upgrade) {
@@ -115,8 +120,7 @@ function createUpgradeElement(u: Upgrade) {
       counter -= currentCost;
       u.level += 1;
       perSecond += u.perLevel;
-      updateDisplays();
-      refreshUpgradesUI();
+      commitState();
     }
   });
 
@@ -132,7 +136,8 @@ function refreshUpgradesUI() {
   );
 }
 
-refreshUpgradesUI();
+// initial UI paint
+commitState();
 
 // Animation loop using requestAnimationFrame. Accumulate fractional perSecond and only
 // add whole pizzas to keep counter an integer (user-visible pizzas).
@@ -147,8 +152,7 @@ function animate(now: number) {
       const toAdd = Math.floor(accumulator);
       counter += toAdd;
       accumulator -= toAdd;
-      updateDisplays();
-      refreshUpgradesUI();
+      commitState();
     }
   }
 
