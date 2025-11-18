@@ -58,6 +58,10 @@ const upgrades: Boost[] = [
     perLevel: 50,
   },
 ];
+let counter = 0; // integer pizzas
+let perSecond = upgrades.reduce((s, u) => s + u.level * u.perLevel, 0); // total pizzas per second from upgrades
+let accumulator = 0; // fractional accumulator for perSecond over frames
+
 // === UI CONSTRUCTION ===
 const title = document.createElement("h1");
 title.textContent = "Cool Pizza Clicker";
@@ -67,10 +71,6 @@ title.style.textAlign = "center";
 const counterDiv = document.createElement("div");
 const perSecondDiv = document.createElement("div");
 const upgradesContainer = document.createElement("div");
-
-let counter = 0; // integer pizzas
-let perSecond = upgrades.reduce((s, u) => s + u.level * u.perLevel, 0); // total pizzas per second from upgrades
-let accumulator = 0; // fractional accumulator for perSecond over frames
 
 counterDiv.textContent = `${counter} Pizza's`;
 perSecondDiv.textContent = `${perSecond.toFixed(2)} / s`;
