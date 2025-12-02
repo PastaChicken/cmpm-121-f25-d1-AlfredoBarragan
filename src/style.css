@@ -3,3 +3,96 @@
   vertical-align: top;
   border: 1px solid salmon;
 }
+
+/* Game styles moved from main.ts */
+.app-bg {
+  background-color: #4e473e; /* light dough color */
+  background-size: cover;
+  background-position: center;
+  min-height: 90vh;
+  position: relative;
+  right: 200px;
+  padding: 1rem;
+  color: #ffd24a; /* cheesy yellow */
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+.game-title {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.counter {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.per-second {
+  text-align: center;
+  color: #ffe100;
+}
+
+.pizza-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1;
+  display: block;
+  margin: 0.5rem auto;
+  font-size: 12rem; /* default, can be overridden by inline if needed */
+}
+
+.upgrades {
+  margin-top: 1rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upgrade-row {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.upgrade-label {
+  margin-right: 1rem;
+}
+
+.buy-btn {
+  padding: 0.5rem 0.75rem;
+  background: #ffd24a; /* cheesy yellow background */
+  color: #000000; /* black text inside button */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buy-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+@keyframes pizzaFall {
+  to {
+    transform: translateY(110vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+.falling-pizza {
+  position: fixed;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation-name: pizzaFall;
+  animation-timing-function: linear;
+}
+
+/* Small responsiveness */
+@media (max-width: 600px) {
+  .pizza-button {
+    font-size: 6rem;
+  }
+}
