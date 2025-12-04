@@ -15,7 +15,7 @@ type Boost = {
 const upgrades: Boost[] = [
   {
     id: "oven",
-    name: "Better Oven",
+    name: "🔥Hotter Oven🔥",
     description: "+0.5 / s",
     initialCost: 10,
     costMultiplier: 1.15,
@@ -24,7 +24,7 @@ const upgrades: Boost[] = [
   },
   {
     id: "marketing",
-    name: "Marketing Campaign",
+    name: "📰Marketing Campaign📰",
     description: "+1 / s",
     initialCost: 25,
     costMultiplier: 1.15,
@@ -33,7 +33,7 @@ const upgrades: Boost[] = [
   },
   {
     id: "delivery",
-    name: "Delivery Route",
+    name: "🚐Delivery Driver🚐",
     description: "+2 / s",
     initialCost: 50,
     costMultiplier: 1.15,
@@ -42,7 +42,7 @@ const upgrades: Boost[] = [
   },
   {
     id: "factory",
-    name: "Pizza Factory",
+    name: "🏬Pizza Factory🏬",
     description: "+10 / s",
     initialCost: 200,
     costMultiplier: 1.15,
@@ -51,7 +51,7 @@ const upgrades: Boost[] = [
   },
   {
     id: "robot",
-    name: "Pizza Robot",
+    name: "🤖Pizza Robot🤖",
     description: "+50 / s",
     initialCost: 2000,
     costMultiplier: 1.15,
@@ -60,7 +60,7 @@ const upgrades: Boost[] = [
   },
   {
     id: "training",
-    name: "Chef Training",
+    name: "🧑‍🍳Chef Training🧑‍🍳",
     description: "+1 click",
     initialCost: 100,
     costMultiplier: 1.15,
